@@ -103,16 +103,7 @@
     }
 
     const slice = filteredEvents.slice(displayedCount, displayedCount + EVENTS_PER_PAGE);
-    slice.forEach((event, i) => {
-      // Insert in-feed ad every 10th card
-      if ((displayedCount + i) > 0 && (displayedCount + i) % 10 === 0) {
-        const adCard = document.createElement('div');
-        adCard.className = 'ad-slot ad-slot--sidebar';
-        adCard.setAttribute('aria-label', 'Advertisement');
-        adCard.id = `ad-infeed-${displayedCount + i}`;
-        eventsList?.appendChild(adCard);
-      }
-
+    slice.forEach((event) => {
       const card = createEventCard(event);
       eventsList?.appendChild(card);
     });
