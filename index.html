@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ConflictWatch Live — Real-Time Global Conflict Event Tracker</title>
+  <meta name="description" content="Track armed conflicts, battles, protests, and violence worldwide in real-time. Interactive map and timeline powered by ACLED data. Free and open-source.">
+  <meta name="keywords" content="conflict tracker, war map, global conflicts, ACLED data, armed conflict, real-time conflict map, violence tracker, protest tracker">
+  <link rel="canonical" href="https://conflictwatch-live.vercel.app/">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="ConflictWatch Live — Real-Time Global Conflict Event Tracker">
+  <meta property="og:description" content="Track armed conflicts, battles, protests, and violence worldwide in real-time on an interactive map.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://conflictwatch-live.vercel.app/">
+  <meta property="og:image" content="https://conflictwatch-live.vercel.app/assets/images/og-preview.svg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="en_US">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="ConflictWatch Live — Global Conflict Map">
+  <meta name="twitter:description" content="Track armed conflicts worldwide in real-time on an interactive map and timeline.">
+  <meta name="twitter:image" content="https://conflictwatch-live.vercel.app/assets/images/og-preview.svg">
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "ConflictWatch Live",
+    "description": "Real-time global conflict event tracker dashboard with interactive map and timeline",
+    "url": "https://conflictwatch-live.vercel.app/",
+    "applicationCategory": "NewsApplication",
+    "operatingSystem": "Any",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+
+  <!-- Leaflet MarkerCluster CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css">
+
+  <!-- Leaflet Fullscreen CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-fullscreen@2.4.0/dist/leaflet.fullscreen.css">
+
+  <!-- App CSS -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/responsive.css">
+
+  <!-- Custom marker & cluster styles -->
+  <style>
+    .custom-marker { background: none; border: none; }
+    .marker-dot {
+      width: 12px; height: 12px; border-radius: 50%;
+      border: 2px solid #fff; box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+    }
+    .marker-cluster-custom { background: none; }
+    .cluster-icon {
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 50%; color: #fff; font-weight: 700;
+      font-family: 'JetBrains Mono', monospace; font-size: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
+    .cluster-icon--small { background: rgba(41,128,185,0.8); width: 30px; height: 30px; }
+    .cluster-icon--medium { background: rgba(230,126,34,0.8); width: 40px; height: 40px; font-size: 13px; }
+    .cluster-icon--large { background: rgba(231,76,60,0.8); width: 50px; height: 50px; font-size: 14px; }
+    .cw-popup .leaflet-popup-content-wrapper {
+      border-radius: 8px; box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+      font-family: 'DM Sans', sans-serif;
+    }
+    .cw-popup .leaflet-popup-tip { box-shadow: 0 4px 16px rgba(0,0,0,0.15); }
+    [data-theme="dark"] .cw-popup .leaflet-popup-content-wrapper {
+      background: #3A3A44; color: #E8E8EC;
+    }
+    [data-theme="dark"] .cw-popup .leaflet-popup-tip { background: #3A3A44; }
+  </style>
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌍</text></svg>">
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to content</a>
+
+  <div class="app">
+    <!-- Status Banner -->
+    <div class="status-banner" id="status-banner" role="alert"></div>
+
+    <!-- Header Ad Slot -->
+    <div class="ad-slot ad-slot--header" id="ad-header" aria-label="Advertisement"></div>
+
+    <!-- Header -->
+    <header class="header">
+      <div class="header__logo">
+        <span style="font-size:1.5rem">🌍</span>
+        <div>
+          <h1 class="header__title">ConflictWatch Live</h1>
+          <span class="header__subtitle">Real-time global conflict tracker</span>
+        </div>
+      </div>
+
+      <div class="header__actions">
+        <div class="last-updated">
+          <span class="last-updated__dot"></span>
+          <span id="last-updated">Loading...</span>
+        </div>
+        <button class="btn btn--ghost" id="filter-toggle" aria-expanded="false" aria-controls="filter-panel">
+          🔍 Filters <span class="filter-count" id="filter-count">0</span>
+        </button>
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">🌙</button>
+        <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+          <span class="hamburger__line"></span>
+          <span class="hamburger__line"></span>
+          <span class="hamburger__line"></span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main" id="main-content">
+      <!-- Map -->
+      <div class="map-container">
+        <div id="map" role="application" aria-label="Conflict events map"></div>
+      </div>
+
+      <!-- Sidebar -->
+      <aside class="sidebar" aria-label="Event list">
+        <div class="sidebar__drag-handle"></div>
+
+        <div class="sidebar__header">
+          <span class="sidebar__title" id="event-count">Loading events...</span>
+          <button class="btn btn--icon btn--ghost" id="sidebar-close" aria-label="Close sidebar">✕</button>
+        </div>
+
+        <!-- Filter Panel (inside sidebar) -->
+        <div class="filter-panel" id="filter-panel" role="region" aria-label="Filters"></div>
+
+        <!-- Search -->
+        <div class="sidebar__search">
+          <input type="search" id="sidebar-search" placeholder="Search events by country, type, keyword..." aria-label="Search events">
+        </div>
+
+        <!-- Events List -->
+        <div class="sidebar__events" id="events-list" role="list" aria-live="polite"></div>
+
+        <!-- Load More -->
+        <div style="padding:8px 16px;text-align:center">
+          <button class="btn btn--ghost" id="load-more" style="display:none;width:100%">Load More Events</button>
+        </div>
+
+        <!-- Sidebar Ad -->
+        <div class="ad-slot ad-slot--sidebar" id="ad-sidebar" aria-label="Advertisement"></div>
+      </aside>
+    </main>
+
+    <!-- Timeline -->
+    <section class="timeline-container" id="timeline" role="navigation" aria-label="Event timeline"></section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <span>ConflictWatch Live &copy; <span id="copyright-year">2026</span> — Data: <a href="https://acleddata.com" target="_blank" rel="noopener noreferrer">ACLED</a></span>
+      <span class="visitor-counter" id="visitor-counter"></span>
+    </footer>
+
+    <!-- Mobile sidebar toggle -->
+    <button class="sidebar-toggle" id="sidebar-toggle" aria-label="Toggle event list">📋</button>
+
+    <!-- Mobile footer ad -->
+    <div class="ad-slot ad-slot--mobile-footer" id="ad-mobile-footer" aria-label="Advertisement"></div>
+  </div>
+
+  <noscript>
+    <div class="noscript-message">
+      <h2>JavaScript Required</h2>
+      <p>ConflictWatch Live requires JavaScript to display the interactive conflict map and event data. Please enable JavaScript in your browser settings.</p>
+    </div>
+  </noscript>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+  <!-- Leaflet MarkerCluster JS -->
+  <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+
+  <!-- Leaflet Fullscreen JS -->
+  <script src="https://unpkg.com/leaflet-fullscreen@2.4.0/dist/Leaflet.fullscreen.min.js"></script>
+
+  <!-- App JS (order matters) -->
+  <script src="js/config.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/map.js"></script>
+  <script src="js/filters.js"></script>
+  <script src="js/timeline.js"></script>
+  <script src="js/counter.js"></script>
+  <script src="js/ads.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

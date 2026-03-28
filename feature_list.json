@@ -1,0 +1,16 @@
+[
+  { "id": "F-001", "title": "Project Scaffold & Dev Environment", "status": "done", "priority": 1, "depends_on": [] },
+  { "id": "F-002", "title": "Interactive Map (Core)", "status": "done", "priority": 1, "depends_on": ["F-001"] },
+  { "id": "F-003", "title": "Data Fetching & Parsing", "status": "done", "priority": 1, "depends_on": ["F-002"] },
+  { "id": "F-004", "title": "Event Sidebar / List Panel", "status": "done", "priority": 2, "depends_on": ["F-003"] },
+  { "id": "F-005", "title": "Filter System", "status": "done", "priority": 2, "depends_on": ["F-003"] },
+  { "id": "F-006", "title": "Timeline Bar", "status": "done", "priority": 2, "depends_on": ["F-003"] },
+  { "id": "F-007", "title": "Visitor Counter", "status": "done", "priority": 3, "depends_on": ["F-001"] },
+  { "id": "F-008", "title": "SEO Optimization", "status": "done", "priority": 2, "depends_on": ["F-001"] },
+  { "id": "F-009", "title": "Google Sheets Data Collection", "status": "done", "priority": 3, "depends_on": ["F-005"] },
+  { "id": "F-010", "title": "Adsterra Ad Integration", "status": "done", "priority": 2, "depends_on": ["F-001"] },
+  { "id": "F-011", "title": "Responsive Design", "status": "done", "priority": 1, "depends_on": ["F-002", "F-004"] },
+  { "id": "F-012", "title": "Dark Mode", "status": "done", "priority": 3, "depends_on": ["F-002"] },
+  { "id": "F-013", "title": "Deployment to Netlify", "status": "todo", "priority": 1, "depends_on": ["F-001"] },
+  { "id": "F-014", "title": "Performance & Accessibility", "status": "done", "priority": 2, "depends_on": ["F-002", "F-008"] }
+]

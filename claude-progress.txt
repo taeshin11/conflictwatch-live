@@ -1,0 +1,13 @@
+2026-03-28T00:00:00Z | F-001 | Created project scaffold: folder structure, all CSS (variables, base, layout, components, responsive), all JS modules, index.html, netlify.toml, robots.txt, sitemap.xml, init.sh | Next: F-002
+2026-03-28T00:01:00Z | F-002 | Built interactive Leaflet map with CartoDB tiles, custom marker icons per severity, marker clustering, popups with event details, zoom controls, dark/light tile switching | Next: F-003
+2026-03-28T00:02:00Z | F-003 | Implemented ACLED API data fetching with fallback to ReliefWeb and sample data, sessionStorage caching, auto-refresh every 30 minutes, loading states | Next: F-004
+2026-03-28T00:03:00Z | F-004 | Built event sidebar with card list, search box, click-to-fly-to-map, infinite scroll with Load More, country flag emojis, fatality badges | Next: F-005
+2026-03-28T00:04:00Z | F-005 | Implemented filter system: event type chips, date range selector, region dropdown, min fatalities input, URL query param sync, filter count badge, sheet webhook logging | Next: F-006
+2026-03-28T00:05:00Z | F-006 | Built horizontal timeline bar chart showing event density per day, color-coded by dominant type, click to filter by date, keyboard accessible | Next: F-007
+2026-03-28T00:06:00Z | F-007 | Visitor counter using localStorage, renders in footer | Next: F-008
+2026-03-28T00:07:00Z | F-008 | SEO: semantic HTML5, meta tags, Open Graph, Twitter Card, JSON-LD structured data, robots.txt, sitemap.xml, skip-to-content link, noscript message | Next: F-009
+2026-03-28T00:08:00Z | F-009 | Google Sheets webhook wiring: logToSheet() in filters.js fires on Apply Filters, config placeholder in config.js | Next: F-010
+2026-03-28T00:09:00Z | F-010 | Adsterra ad integration: ad slots in HTML, lazy-loading ad manager, config object with placeholders for all ad units | Next: F-011
+2026-03-28T00:10:00Z | F-011 | Responsive design: mobile bottom sheet sidebar, tablet layout, desktop sidebar, mobile-only ads, collapsible panels, hamburger menu | Next: F-012
+2026-03-28T00:11:00Z | F-012 | Dark mode: theme toggle, CSS custom properties swap, localStorage persistence, system preference detection, map tile switching | Next: F-014
+2026-03-28T00:12:00Z | F-014 | Performance & accessibility: skip-to-content, ARIA labels, keyboard navigation, loading skeletons, lazy ad loading, color contrast, sr-only class | Next: Google Apps Script, README
