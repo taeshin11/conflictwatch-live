@@ -91,10 +91,10 @@
     if (filteredEvents.length === 0 && reset) {
       if (eventsList) {
         eventsList.innerHTML = `
-          <div style="padding:32px 16px;text-align:center;color:var(--text-muted)">
-            <div style="font-size:2rem;margin-bottom:8px">🔍</div>
-            <div style="font-weight:500;color:var(--text-secondary)">No events match your filters</div>
-            <div style="font-size:0.8rem;margin-top:4px">Try adjusting the date range, region, or event type</div>
+          <div class="empty-state">
+            <div class="empty-state__icon">🔍</div>
+            <div class="empty-state__title">No events match your filters</div>
+            <div class="empty-state__text">Try adjusting the date range, region, or event type</div>
           </div>
         `;
       }
@@ -140,21 +140,22 @@
     card.setAttribute('aria-label', `${event.type} in ${event.country}`);
 
     const flag = getCountryFlag(event.country);
+    const shortDate = formatDate(event.date);
 
     card.innerHTML = `
-      <div class="event-card__icon" style="background:${typeConfig.color || '#95A5A6'}">
-        ${typeConfig.icon || '📍'}
-      </div>
+      <div class="event-card__severity-dot" style="background:${typeConfig.color || '#868E96'}"></div>
       <div class="event-card__content">
-        <div class="event-card__title">${flag} ${event.notes || event.type}</div>
+        <div class="event-card__header">
+          <div class="event-card__title">${flag} ${event.notes || event.type}</div>
+          <span class="badge badge--${severityClass}">${event.type.split('/')[0]}</span>
+        </div>
         <div class="event-card__meta">
-          <span>${event.date}</span>
-          <span>·</span>
-          <span>${event.location || event.country}</span>
-          ${event.fatalities > 0 ? `<span class="event-card__fatalities">☠ ${event.fatalities}</span>` : ''}
+          <span class="event-card__meta-item">${shortDate}</span>
+          <span class="event-card__meta-sep"></span>
+          <span class="event-card__meta-item">${event.location || event.country}</span>
+          ${event.fatalities > 0 ? `<span class="event-card__meta-sep"></span><span class="event-card__fatalities">${event.fatalities} killed</span>` : ''}
         </div>
       </div>
-      <span class="badge badge--${severityClass}">${event.type.split('/')[0]}</span>
     `;
 
     card._eventId = event.id;
@@ -201,7 +202,7 @@
 
   function showLoadingSkeleton() {
     if (!eventsList) return;
-    eventsList.innerHTML = Array(8).fill(0).map(() => `
+    eventsList.innerHTML = Array(10).fill(0).map(() => `
       <div class="skeleton-card">
         <div class="skeleton skeleton-card__icon"></div>
         <div class="skeleton-card__lines">
@@ -212,14 +213,25 @@
     `).join('');
   }
 
+  function formatDate(dateStr) {
+    if (!dateStr) return '';
+    const d = new Date(dateStr);
+    const now = new Date();
+    const diffDays = Math.floor((now - d) / 86400000);
+    if (diffDays === 0) return 'Today';
+    if (diffDays === 1) return 'Yesterday';
+    if (diffDays < 7) return `${diffDays}d ago`;
+    return d.toLocaleDateString('en', { month: 'short', day: 'numeric' });
+  }
+
   function updateSourceBanner() {
     if (!statusBanner) return;
     const source = DataService.getSource();
     if (source === 'sample') {
-      statusBanner.textContent = '⚠️ Showing sample data — configure your ACLED API key for live data';
+      statusBanner.innerHTML = '<span class="status-banner__icon">ℹ️</span> Showing sample data — add your ACLED API key for live events';
       statusBanner.classList.add('status-banner--visible');
     } else if (source === 'reliefweb') {
-      statusBanner.textContent = 'Data source: ReliefWeb (limited coverage)';
+      statusBanner.innerHTML = '<span class="status-banner__icon">ℹ️</span> Data source: ReliefWeb (limited coverage)';
       statusBanner.classList.add('status-banner--visible');
     } else {
       statusBanner.classList.remove('status-banner--visible');

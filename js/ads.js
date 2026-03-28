@@ -43,10 +43,8 @@ const AdManager = (() => {
     placements.forEach(key => {
       const cfg = AD_CONFIG.adsterra[key];
       if (cfg && cfg.scriptSrc) {
+        showAdSlot(cfg.containerId);
         loadAdUnit(cfg.containerId, cfg.scriptSrc);
-      } else {
-        // Hide empty ad containers
-        hideAdSlot(cfg?.containerId);
       }
     });
   }
@@ -72,10 +70,16 @@ const AdManager = (() => {
     container.appendChild(script);
   }
 
+  function showAdSlot(containerId) {
+    if (!containerId) return;
+    const el = document.getElementById(containerId);
+    if (el) el.classList.add('ad-slot--loaded');
+  }
+
   function hideAdSlot(containerId) {
     if (!containerId) return;
     const el = document.getElementById(containerId);
-    if (el) el.classList.add('ad-slot--hidden');
+    if (el) el.classList.remove('ad-slot--loaded');
   }
 
   return { init };
