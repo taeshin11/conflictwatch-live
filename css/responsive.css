@@ -75,8 +75,17 @@
     border-radius: 0;
   }
 
-  /* Hide all ads on mobile */
-  .ad-slot { display: none !important; }
+  /* Hide desktop ads on mobile, allow mobile footer ad */
+  .ad-slot--header,
+  .ad-slot--sidebar { display: none !important; }
+  .ad-slot--mobile-footer.ad-slot--loaded {
+    display: flex !important;
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9000;
+  }
 
   /* Leaflet attribution — compact on mobile */
   .leaflet-control-attribution {

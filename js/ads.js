@@ -3,18 +3,21 @@ const AdManager = (() => {
   const AD_CONFIG = {
     enabled: true,
     adsterra: {
-      socialBarScript: '',  // '//pl{YOUR_ID}.profitablegatecpm.com/{YOUR_KEY}.js'
+      socialBarScript: '//pl29001191.profitablecpmratenetwork.com/c5/87/4c/c5874ca824aaf6c5cb9089ec92cd135b.js',
       headerBanner: {
-        scriptSrc: '',
-        containerId: 'ad-header'
+        key: 'a835daaded0816a7b8fd3b20153b9c48',
+        width: 728,
+        height: 90
       },
       sidebarRect: {
-        scriptSrc: '',
-        containerId: 'ad-sidebar'
-      },
+        key: 'c23e804a749f8a05409f310252f9792e',
+        width: 300,
+        height: 250
+      }
       mobileFooter: {
-        scriptSrc: '',
-        containerId: 'ad-mobile-footer'
+        key: '13e2dcb7134e3dfb826a79dc31b15c14',
+        width: 320,
+        height: 50
       }
     }
   };
@@ -22,31 +25,63 @@ const AdManager = (() => {
   function init() {
     if (!AD_CONFIG.enabled) return;
 
-    // Lazy-load ads after main content
     if (document.readyState === 'complete') {
       loadAds();
     } else {
       window.addEventListener('load', () => {
-        setTimeout(loadAds, 1000); // Delay to not block LCP
+        setTimeout(loadAds, 1000);
       });
     }
   }
 
   function loadAds() {
-    // Social Bar (highest RPM)
+    // Social Bar
     if (AD_CONFIG.adsterra.socialBarScript) {
       loadScript(AD_CONFIG.adsterra.socialBarScript);
     }
 
-    // Load placement-specific ads
-    const placements = ['headerBanner', 'sidebarRect', 'mobileFooter'];
-    placements.forEach(key => {
-      const cfg = AD_CONFIG.adsterra[key];
-      if (cfg && cfg.scriptSrc) {
-        showAdSlot(cfg.containerId);
-        loadAdUnit(cfg.containerId, cfg.scriptSrc);
+    // Banner placements
+    const slots = {
+      'ad-header': AD_CONFIG.adsterra.headerBanner,
+      'ad-sidebar': AD_CONFIG.adsterra.sidebarRect,
+      'ad-mobile-footer': AD_CONFIG.adsterra.mobileFooter
+    };
+
+    for (const [containerId, cfg] of Object.entries(slots)) {
+      if (cfg && cfg.key) {
+        loadBannerUnit(containerId, cfg);
       }
-    });
+    }
+  }
+
+  function loadBannerUnit(containerId, cfg) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+
+    // Show the container
+    container.classList.add('ad-slot--loaded');
+
+    // Set atOptions globally
+    const optionsScript = document.createElement('script');
+    optionsScript.textContent = `
+      atOptions = {
+        'key' : '${cfg.key}',
+        'format' : 'iframe',
+        'height' : ${cfg.height},
+        'width' : ${cfg.width},
+        'params' : {}
+      };
+    `;
+    container.appendChild(optionsScript);
+
+    // Load invoke script
+    const invokeScript = document.createElement('script');
+    invokeScript.async = true;
+    invokeScript.src = `https://www.highperformanceformat.com/${cfg.key}/invoke.js`;
+    invokeScript.onerror = () => {
+      container.classList.remove('ad-slot--loaded');
+    };
+    container.appendChild(invokeScript);
   }
 
   function loadScript(src) {
@@ -54,32 +89,7 @@ const AdManager = (() => {
     script.async = true;
     script.dataset.cfasync = 'false';
     script.src = src;
-    script.onerror = () => console.warn('Ad script failed to load:', src);
     document.head.appendChild(script);
-  }
-
-  function loadAdUnit(containerId, scriptSrc) {
-    const container = document.getElementById(containerId);
-    if (!container) return;
-
-    const script = document.createElement('script');
-    script.async = true;
-    script.dataset.cfasync = 'false';
-    script.src = scriptSrc;
-    script.onerror = () => hideAdSlot(containerId);
-    container.appendChild(script);
-  }
-
-  function showAdSlot(containerId) {
-    if (!containerId) return;
-    const el = document.getElementById(containerId);
-    if (el) el.classList.add('ad-slot--loaded');
-  }
-
-  function hideAdSlot(containerId) {
-    if (!containerId) return;
-    const el = document.getElementById(containerId);
-    if (el) el.classList.remove('ad-slot--loaded');
   }
 
   return { init };
