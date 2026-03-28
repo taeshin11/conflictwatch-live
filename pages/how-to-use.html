@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How to Use & FAQ — ConflictWatch Live</title>
+  <meta name="description" content="Learn how to use ConflictWatch Live to explore global conflicts on an interactive map. Step-by-step guide and frequently asked questions.">
+  <meta name="keywords" content="how to use conflict tracker, conflict map guide, ACLED map tutorial, global conflict FAQ, war tracker help">
+  <link rel="canonical" href="https://conflictwatch-live.vercel.app/pages/how-to-use.html">
+  <meta property="og:title" content="How to Use ConflictWatch Live — Guide & FAQ">
+  <meta property="og:description" content="Step-by-step guide to exploring global conflicts on ConflictWatch Live's interactive map dashboard.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://conflictwatch-live.vercel.app/pages/how-to-use.html">
+  <meta property="og:image" content="https://conflictwatch-live.vercel.app/assets/images/og-preview.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌍</text></svg>">
+  <style>
+    .page { max-width: 760px; margin: 0 auto; padding: 40px 20px 80px; }
+    .page-header { display: flex; align-items: center; gap: 10px; margin-bottom: 32px; padding-bottom: 16px; border-bottom: 2px solid var(--border); }
+    .page-header a { color: var(--text-muted); font-size: 0.85rem; text-decoration: none; }
+    .page-header a:hover { color: var(--accent); }
+    .page h1 { font-size: 2rem; margin-bottom: 8px; }
+    .page h2 { font-size: 1.35rem; margin: 36px 0 12px; color: var(--text-primary); }
+    .page h3 { font-size: 1.1rem; margin: 24px 0 8px; color: var(--text-primary); font-family: 'DM Sans', sans-serif; }
+    .page p { margin-bottom: 16px; color: var(--text-secondary); line-height: 1.8; font-size: 0.95rem; }
+    .page ul, .page ol { margin: 0 0 16px 20px; color: var(--text-secondary); line-height: 1.8; }
+    .page li { margin-bottom: 8px; }
+    .page strong { color: var(--text-primary); }
+    .step { background: var(--bg-secondary); border-radius: 10px; padding: 20px 24px; margin-bottom: 16px; border-left: 4px solid var(--accent); }
+    .step__number { font-family: 'DM Serif Display', serif; font-size: 1.5rem; color: var(--accent); margin-bottom: 4px; }
+    .step__title { font-weight: 600; font-size: 1rem; margin-bottom: 6px; color: var(--text-primary); }
+    .step p { margin-bottom: 0; }
+    .faq { margin-bottom: 20px; }
+    .faq__q { font-weight: 600; color: var(--text-primary); margin-bottom: 6px; font-size: 1rem; }
+    .faq__a { color: var(--text-secondary); line-height: 1.8; font-size: 0.95rem; }
+    .page-footer { margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--border); font-size: 0.75rem; color: var(--text-muted); display: flex; flex-wrap: wrap; gap: 16px; justify-content: space-between; }
+    .page-footer a { color: var(--text-muted); text-decoration: underline; text-underline-offset: 2px; }
+    .page-footer a:hover { color: var(--accent); }
+    .page-footer__links { display: flex; gap: 16px; flex-wrap: wrap; }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="page-header">
+      <a href="/">← Back to Map</a>
+    </div>
+
+    <h1>How to Use ConflictWatch Live</h1>
+    <p>ConflictWatch Live is designed to be intuitive and straightforward. Follow these three steps to explore global conflict data effectively.</p>
+
+    <div class="step">
+      <div class="step__number">Step 1</div>
+      <div class="step__title">Explore the Map</div>
+      <p>When you open ConflictWatch Live, you'll see a world map populated with colored markers representing recent conflict events. <strong>Zoom in</strong> by scrolling or pinching on mobile to see individual events. <strong>Click any marker</strong> to see event details including the type, date, location, actors involved, and reported fatalities. Clusters (circles with numbers) represent groups of nearby events — click them to zoom in and expand.</p>
+    </div>
+
+    <div class="step">
+      <div class="step__number">Step 2</div>
+      <div class="step__title">Filter & Search</div>
+      <p>Click the <strong>Filters</strong> button in the header to narrow down events. You can filter by event type (battles, protests, violence against civilians, etc.), date range (last 7, 30, or 90 days), geographic region, and minimum fatality count. Use the <strong>search bar</strong> in the sidebar to find events by country name, location, or keyword. All filters update the map and event list simultaneously.</p>
+    </div>
+
+    <div class="step">
+      <div class="step__number">Step 3</div>
+      <div class="step__title">Browse the Timeline & Event List</div>
+      <p>The <strong>timeline bar</strong> at the bottom shows event density per day — taller bars mean more events. Click any bar to filter the map and sidebar to that specific day. The <strong>sidebar</strong> (or bottom sheet on mobile) lists all events sorted by date. Click any event card to fly to its location on the map and see full details in a popup.</p>
+    </div>
+
+    <h2>Tips for Power Users</h2>
+    <ul>
+      <li><strong>Share filtered views</strong>: Filter states are stored in the URL. Copy and paste the URL to share your exact view with colleagues.</li>
+      <li><strong>Dark mode</strong>: Click the moon/sun icon in the header to toggle dark mode. It follows your system preference by default.</li>
+      <li><strong>Keyboard navigation</strong>: Use Tab to navigate event cards and Enter to select them. The map supports standard keyboard controls.</li>
+      <li><strong>Data refresh</strong>: Data automatically refreshes every 30 minutes. The green dot and timestamp in the header show when data was last fetched.</li>
+    </ul>
+
+    <h2>Frequently Asked Questions</h2>
+
+    <div class="faq">
+      <div class="faq__q">Q: Where does ConflictWatch get its data?</div>
+      <div class="faq__a">ConflictWatch Live uses data from the <strong>Armed Conflict Location & Event Data Project (ACLED)</strong>, a globally recognized research organization that collects real-time data on political violence, protests, and conflict events in every country. ACLED's methodology involves coding events from thousands of local, national, and international sources, providing one of the most comprehensive conflict datasets available. When ACLED data is unavailable, the system falls back to ReliefWeb reports or displays sample data for demonstration purposes.</div>
+    </div>
+
+    <div class="faq">
+      <div class="faq__q">Q: How often is the data updated?</div>
+      <div class="faq__a">The dashboard fetches fresh data every 30 minutes from the API. ACLED itself publishes updated datasets weekly (typically on Fridays), though real-time data may have a 1-7 day lag depending on the region and the availability of source reporting. The "Last updated" indicator in the header shows when the most recent data fetch occurred.</div>
+    </div>
+
+    <div class="faq">
+      <div class="faq__q">Q: Is ConflictWatch Live free to use?</div>
+      <div class="faq__a">Yes, completely. ConflictWatch Live is free, open-source, and does not require any account or registration. The tool is supported by non-intrusive display advertising. We believe that access to conflict data is essential for informed public discourse, education, and research — and should not be gatekept behind paywalls.</div>
+    </div>
+
+    <div class="faq">
+      <div class="faq__q">Q: Can I use ConflictWatch data in my research or reporting?</div>
+      <div class="faq__a">ConflictWatch Live is a visualization and exploration tool. The underlying data belongs to ACLED and is subject to their terms of use. For academic research or professional reporting, we strongly recommend citing ACLED directly and verifying data through their official platform at <a href="https://acleddata.com" target="_blank" rel="noopener noreferrer">acleddata.com</a>. ConflictWatch is best used for initial exploration, trend identification, and visual reference — not as a primary citation source.</div>
+    </div>
+
+    <div class="faq">
+      <div class="faq__q">Q: What do the different marker colors mean?</div>
+      <div class="faq__a">Markers are color-coded by event severity and type: <strong>Red</strong> represents battles and explosions/remote violence (the most severe events). <strong>Orange</strong> indicates violence against civilians. <strong>Yellow</strong> marks protests and riots. <strong>Blue</strong> represents strategic developments such as arrests, agreements, or troop movements. Cluster circles use similar color coding — larger red clusters indicate areas with high concentrations of severe events.</div>
+    </div>
+
+    <div class="faq">
+      <div class="faq__q">Q: Why do I see "Showing sample data" instead of real events?</div>
+      <div class="faq__a">If you see a banner saying "Showing sample data," it means the ACLED API key has not been configured or the API is temporarily unavailable. The sample data provides a realistic preview of how the dashboard works with 200 procedurally generated events across known conflict zones. For live data, the site operator needs to configure a valid ACLED API key in the application settings.</div>
+    </div>
+
+    <div class="faq">
+      <div class="faq__q">Q: Does ConflictWatch work on mobile devices?</div>
+      <div class="faq__a">Yes. The dashboard is fully responsive and optimized for mobile use. On smaller screens, the sidebar becomes a draggable bottom sheet, and the map takes the full viewport height. You can pinch to zoom on the map, swipe the bottom sheet to browse events, and use the search and filter features just as you would on desktop.</div>
+    </div>
+
+    <footer class="page-footer">
+      <span>&copy; <script>document.write(new Date().getFullYear())</script> ConflictWatch Live</span>
+      <div class="page-footer__links">
+        <a href="/pages/about.html">About</a>
+        <a href="/pages/how-to-use.html">How to Use & FAQ</a>
+        <a href="/pages/privacy.html">Privacy Policy</a>
+        <a href="/pages/terms.html">Terms of Service</a>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>

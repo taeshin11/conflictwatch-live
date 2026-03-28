@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us — ConflictWatch Live | Global Conflict Tracker</title>
+  <meta name="description" content="Learn about ConflictWatch Live, a free real-time dashboard that tracks armed conflicts, protests, and violence worldwide using ACLED data on an interactive map.">
+  <meta name="keywords" content="about conflictwatch, conflict tracker, war map, ACLED data, global security, armed conflict monitor, peace research tool">
+  <link rel="canonical" href="https://conflictwatch-live.vercel.app/pages/about.html">
+  <meta property="og:title" content="About ConflictWatch Live — Real-Time Conflict Tracker">
+  <meta property="og:description" content="ConflictWatch Live is a free dashboard tracking armed conflicts and protests worldwide on an interactive map and timeline.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://conflictwatch-live.vercel.app/pages/about.html">
+  <meta property="og:image" content="https://conflictwatch-live.vercel.app/assets/images/og-preview.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌍</text></svg>">
+  <style>
+    .page { max-width: 760px; margin: 0 auto; padding: 40px 20px 80px; }
+    .page-header { display: flex; align-items: center; gap: 10px; margin-bottom: 32px; padding-bottom: 16px; border-bottom: 2px solid var(--border); }
+    .page-header a { color: var(--text-muted); font-size: 0.85rem; text-decoration: none; }
+    .page-header a:hover { color: var(--accent); }
+    .page h1 { font-size: 2rem; margin-bottom: 8px; }
+    .page h2 { font-size: 1.35rem; margin: 32px 0 12px; color: var(--text-primary); }
+    .page p { margin-bottom: 16px; color: var(--text-secondary); line-height: 1.8; font-size: 0.95rem; }
+    .page ul { margin: 0 0 16px 20px; color: var(--text-secondary); line-height: 1.8; }
+    .page li { margin-bottom: 8px; }
+    .page strong { color: var(--text-primary); }
+    .page-footer { margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--border); font-size: 0.75rem; color: var(--text-muted); display: flex; flex-wrap: wrap; gap: 16px; justify-content: space-between; }
+    .page-footer a { color: var(--text-muted); text-decoration: underline; text-underline-offset: 2px; }
+    .page-footer a:hover { color: var(--accent); }
+    .page-footer__links { display: flex; gap: 16px; flex-wrap: wrap; }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="page-header">
+      <a href="/">← Back to Map</a>
+    </div>
+
+    <h1>About ConflictWatch Live</h1>
+    <p><strong>ConflictWatch Live</strong> is a free, open-source dashboard that visualizes armed conflict events around the world in real time. Our mission is to make global security data accessible, understandable, and actionable for everyone — from journalists and researchers to students and concerned citizens.</p>
+
+    <h2>The Problem We Solve</h2>
+    <p>Armed conflicts, political violence, and civil unrest affect millions of people worldwide every day. Yet the data about these events is often scattered across academic databases, government reports, and fragmented news coverage. Most tools that aggregate this information are locked behind paywalls or require specialized technical knowledge to use.</p>
+    <p>ConflictWatch Live bridges this gap by presenting conflict data on an intuitive, interactive map with filtering, search, and timeline capabilities — all completely free, with no account required.</p>
+
+    <h2>Who Is This For?</h2>
+    <ul>
+      <li><strong>Journalists</strong> who need a quick visual overview of conflict hotspots for reporting and fact-checking.</li>
+      <li><strong>Academic researchers</strong> studying conflict patterns, political violence, and peace processes across regions.</li>
+      <li><strong>Policy analysts</strong> and NGO staff who monitor global security situations for risk assessment and humanitarian planning.</li>
+      <li><strong>Students</strong> learning about international relations, geopolitics, and conflict studies.</li>
+      <li><strong>The general public</strong> who want to stay informed about global security events beyond headline news.</li>
+    </ul>
+
+    <h2>How It Works</h2>
+    <p>ConflictWatch Live aggregates data from the <strong>Armed Conflict Location & Event Data Project (ACLED)</strong>, one of the most respected and comprehensive conflict event databases in the world. ACLED collects real-time data on political violence and protest events across every country, coding each event by type, date, location, actors involved, and reported fatalities.</p>
+    <p>Our dashboard fetches this data and plots it on an interactive map powered by <strong>Leaflet.js</strong> with marker clustering for dense regions. Events are color-coded by severity: red for battles and explosions, orange for violence against civilians, yellow for protests and riots, and blue for strategic developments.</p>
+    <p>The <strong>filter system</strong> lets you narrow down events by type, date range, region, and minimum fatality count. The <strong>timeline bar</strong> at the bottom shows event density per day, allowing you to spot spikes in activity at a glance. All filter states are saved in the URL, making it easy to share specific views with colleagues.</p>
+
+    <h2>Our Technology</h2>
+    <p>ConflictWatch Live is built with vanilla HTML, CSS, and JavaScript — no heavy frameworks, no build steps, no server costs. This deliberate choice keeps the application fast, lightweight, and free to host indefinitely. The entire codebase is open-source.</p>
+    <ul>
+      <li><strong>Map rendering</strong>: Leaflet.js with CartoDB Positron/DarkMatter tiles</li>
+      <li><strong>Marker clustering</strong>: Leaflet.markercluster for handling hundreds of data points</li>
+      <li><strong>Data source</strong>: ACLED API with fallback to ReliefWeb and sample data</li>
+      <li><strong>Hosting</strong>: Vercel (free tier, auto-deployed from GitHub)</li>
+      <li><strong>Caching</strong>: sessionStorage for reducing API calls between page loads</li>
+      <li><strong>Design</strong>: Custom CSS with dark mode support and responsive layouts</li>
+    </ul>
+
+    <h2>Data Accuracy & Limitations</h2>
+    <p>The data displayed on ConflictWatch Live comes directly from ACLED and reflects their methodology and coverage. While ACLED is widely regarded as one of the most reliable sources for conflict event data, no dataset is perfect. Events may be reported with a delay, and fatality figures are often estimates based on available reporting.</p>
+    <p>ConflictWatch Live is a <strong>visualization and exploration tool</strong>, not a primary data source. For academic research or official reporting, we strongly recommend cross-referencing with ACLED's own platform and other verified sources.</p>
+
+    <h2>Contact</h2>
+    <p>ConflictWatch Live is an independent project. For questions, feedback, or collaboration inquiries, please open an issue on our <a href="https://github.com/taeshin11/conflictwatch-live" target="_blank" rel="noopener noreferrer">GitHub repository</a>.</p>
+
+    <footer class="page-footer">
+      <span>&copy; <script>document.write(new Date().getFullYear())</script> ConflictWatch Live</span>
+      <div class="page-footer__links">
+        <a href="/pages/about.html">About</a>
+        <a href="/pages/how-to-use.html">How to Use & FAQ</a>
+        <a href="/pages/privacy.html">Privacy Policy</a>
+        <a href="/pages/terms.html">Terms of Service</a>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
