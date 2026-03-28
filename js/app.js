@@ -134,16 +134,16 @@
     const shortDate = formatDate(event.date);
 
     card.innerHTML = `
-      <div class="event-card__severity-dot" style="background:${typeConfig.color || '#868E96'}"></div>
+      <div class="event-card__bar" style="background:${typeConfig.color || '#94A3B8'}"></div>
       <div class="event-card__content">
         <div class="event-card__header">
           <div class="event-card__title">${flag} ${event.notes || event.type}</div>
           <span class="badge badge--${severityClass}">${event.type.split('/')[0]}</span>
         </div>
         <div class="event-card__meta">
-          <span class="event-card__meta-item">${shortDate}</span>
+          <span>${shortDate}</span>
           <span class="event-card__meta-sep"></span>
-          <span class="event-card__meta-item">${event.location || event.country}</span>
+          <span>${event.location || event.country}</span>
           ${event.fatalities > 0 ? `<span class="event-card__meta-sep"></span><span class="event-card__fatalities">${event.fatalities} killed</span>` : ''}
         </div>
       </div>
@@ -193,7 +193,7 @@
 
   function showLoadingSkeleton() {
     if (!eventsList) return;
-    eventsList.innerHTML = Array(10).fill(0).map(() => `
+    eventsList.innerHTML = Array(12).fill(0).map(() => `
       <div class="skeleton-card">
         <div class="skeleton skeleton-card__icon"></div>
         <div class="skeleton-card__lines">
@@ -242,9 +242,30 @@
     if (!eventCountEl) return;
     const selectedDate = Timeline.getSelectedDate();
     if (selectedDate) {
-      eventCountEl.textContent = `${filteredEvents.length} events on ${selectedDate}`;
+      eventCountEl.textContent = `${filteredEvents.length} events · ${selectedDate}`;
     } else {
       eventCountEl.textContent = `${filteredEvents.length} events`;
+    }
+
+    // Update map overlay stats
+    const totalEl = document.getElementById('stat-total');
+    const countriesEl = document.getElementById('stat-countries');
+    const fatalitiesEl = document.getElementById('stat-fatalities');
+    const fatalitiesWrap = document.getElementById('stat-fatalities-wrap');
+
+    if (totalEl) totalEl.textContent = filteredEvents.length;
+    if (countriesEl) {
+      const countries = new Set(filteredEvents.map(e => e.country)).size;
+      countriesEl.textContent = countries;
+    }
+    if (fatalitiesEl && fatalitiesWrap) {
+      const totalFatalities = filteredEvents.reduce((sum, e) => sum + (e.fatalities || 0), 0);
+      if (totalFatalities > 0) {
+        fatalitiesEl.textContent = totalFatalities.toLocaleString();
+        fatalitiesWrap.style.display = '';
+      } else {
+        fatalitiesWrap.style.display = 'none';
+      }
     }
   }
 

@@ -79,18 +79,18 @@ const MapModule = (() => {
 
   function createPopupContent(event) {
     const typeConfig = CONFIG.eventTypes[event.type] || {};
-    const fatalityBadge = event.fatalities > 0
-      ? `<span class="map-popup__detail" style="color:var(--severity-critical);font-weight:600">☠ ${event.fatalities} fatalities</span>`
-      : '';
+    const severity = typeConfig.severity || 'info';
 
     return `
       <div class="map-popup">
-        <div class="map-popup__title">${typeConfig.icon || '📍'} ${event.notes || event.type}</div>
-        <div class="map-popup__detail">📅 ${event.date}</div>
-        <div class="map-popup__detail">📍 ${event.location}, ${event.country}</div>
-        <div class="map-popup__detail">🏷️ ${event.type}${event.subType ? ' — ' + event.subType : ''}</div>
-        ${fatalityBadge}
-        ${event.actor1 ? `<div class="map-popup__detail">👥 ${event.actor1}${event.actor2 ? ' vs ' + event.actor2 : ''}</div>` : ''}
+        <span class="map-popup__type badge badge--${severity}">${event.type}</span>
+        <div class="map-popup__title">${event.notes || event.type}</div>
+        <div class="map-popup__details">
+          <div class="map-popup__detail"><span class="map-popup__detail-icon">&#x1F4C5;</span> ${event.date}</div>
+          <div class="map-popup__detail"><span class="map-popup__detail-icon">&#x1F4CD;</span> ${event.location}, ${event.country}</div>
+          ${event.fatalities > 0 ? `<div class="map-popup__detail" style="color:var(--severity-critical);font-weight:600"><span class="map-popup__detail-icon">&#x26A0;</span> ${event.fatalities} fatalities reported</div>` : ''}
+          ${event.actor1 ? `<div class="map-popup__detail"><span class="map-popup__detail-icon">&#x1F465;</span> ${event.actor1}${event.actor2 ? ' vs ' + event.actor2 : ''}</div>` : ''}
+        </div>
         ${event.source ? `<div class="map-popup__source">Source: ${event.source}</div>` : ''}
       </div>
     `;
