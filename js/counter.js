@@ -9,18 +9,26 @@ const VisitorCounter = (() => {
   }
 
   function trackVisit() {
-    const today = new Date().toISOString().split('T')[0];
-    const stored = localStorage.getItem(STORAGE_KEY);
+    try {
+      const today = new Date().toISOString().split('T')[0];
+      const stored = localStorage.getItem(STORAGE_KEY);
 
-    if (stored !== today) {
-      localStorage.setItem(STORAGE_KEY, today);
-      const total = parseInt(localStorage.getItem(COUNT_STORAGE) || '0') + 1;
-      localStorage.setItem(COUNT_STORAGE, total.toString());
+      if (stored !== today) {
+        localStorage.setItem(STORAGE_KEY, today);
+        const total = parseInt(localStorage.getItem(COUNT_STORAGE) || '0', 10) + 1;
+        localStorage.setItem(COUNT_STORAGE, total.toString());
+      }
+    } catch (e) {
+      // localStorage may be disabled
     }
   }
 
   function getCount() {
-    return parseInt(localStorage.getItem(COUNT_STORAGE) || '1');
+    try {
+      return parseInt(localStorage.getItem(COUNT_STORAGE) || '1', 10);
+    } catch (e) {
+      return 1;
+    }
   }
 
   function render() {

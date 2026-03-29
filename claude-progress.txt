@@ -11,3 +11,7 @@
 2026-03-28T00:10:00Z | F-011 | Responsive design: mobile bottom sheet sidebar, tablet layout, desktop sidebar, mobile-only ads, collapsible panels, hamburger menu | Next: F-012
 2026-03-28T00:11:00Z | F-012 | Dark mode: theme toggle, CSS custom properties swap, localStorage persistence, system preference detection, map tile switching | Next: F-014
 2026-03-28T00:12:00Z | F-014 | Performance & accessibility: skip-to-content, ARIA labels, keyboard navigation, loading skeletons, lazy ad loading, color contrast, sr-only class | Next: Google Apps Script, README
+2026-03-30T00:00:00Z | F-013 | Deployed to Vercel production (conflictwatch-live.vercel.app), connected GitHub auto-deploy | Next: Bug fixes
+2026-03-30T00:01:00Z | FIXES | Fixed ads.js syntax error, ACLED date param, XSS sanitization, double filtering | Next: Traffic & UX
+2026-03-30T00:02:00Z | SEO | Added FAQ structured data, IndexNow submission (Bing/Yandex), PNG OG image, PWA manifest, preload hints, share button, expanded meta keywords | Next: Feedback mechanism
+2026-03-30T00:03:00Z | UX | Added feedback FAB button + footer link (mailto) on all pages, social share via Web Share API | All PRD features COMPLETE
