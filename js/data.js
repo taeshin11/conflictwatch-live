@@ -17,7 +17,7 @@ const DataService = (() => {
     const params = new URLSearchParams({
       key: CONFIG.acled.key,
       email: CONFIG.acled.email,
-      event_date: `${dateFrom}|`,
+      event_date: `${dateFrom}|${new Date().toISOString().split('T')[0]}`,
       event_date_where: 'BETWEEN',
       limit: CONFIG.acled.limit.toString()
     });

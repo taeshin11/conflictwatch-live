@@ -13,7 +13,7 @@ const AdManager = (() => {
         key: 'c23e804a749f8a05409f310252f9792e',
         width: 300,
         height: 250
-      }
+      },
       mobileFooter: {
         key: '13e2dcb7134e3dfb826a79dc31b15c14',
         width: 320,

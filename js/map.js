@@ -83,15 +83,15 @@ const MapModule = (() => {
 
     return `
       <div class="map-popup">
-        <span class="map-popup__type badge badge--${severity}">${event.type}</span>
-        <div class="map-popup__title">${event.notes || event.type}</div>
+        <span class="map-popup__type badge badge--${severity}">${escapeHtml(event.type)}</span>
+        <div class="map-popup__title">${escapeHtml(event.notes || event.type)}</div>
         <div class="map-popup__details">
-          <div class="map-popup__detail"><span class="map-popup__detail-icon">&#x1F4C5;</span> ${event.date}</div>
-          <div class="map-popup__detail"><span class="map-popup__detail-icon">&#x1F4CD;</span> ${event.location}, ${event.country}</div>
+          <div class="map-popup__detail"><span class="map-popup__detail-icon">&#x1F4C5;</span> ${escapeHtml(event.date)}</div>
+          <div class="map-popup__detail"><span class="map-popup__detail-icon">&#x1F4CD;</span> ${escapeHtml(event.location)}, ${escapeHtml(event.country)}</div>
           ${event.fatalities > 0 ? `<div class="map-popup__detail" style="color:var(--severity-critical);font-weight:600"><span class="map-popup__detail-icon">&#x26A0;</span> ${event.fatalities} fatalities reported</div>` : ''}
-          ${event.actor1 ? `<div class="map-popup__detail"><span class="map-popup__detail-icon">&#x1F465;</span> ${event.actor1}${event.actor2 ? ' vs ' + event.actor2 : ''}</div>` : ''}
+          ${event.actor1 ? `<div class="map-popup__detail"><span class="map-popup__detail-icon">&#x1F465;</span> ${escapeHtml(event.actor1)}${event.actor2 ? ' vs ' + escapeHtml(event.actor2) : ''}</div>` : ''}
         </div>
-        ${event.source ? `<div class="map-popup__source">Source: ${event.source}</div>` : ''}
+        ${event.source ? `<div class="map-popup__source">Source: ${escapeHtml(event.source)}</div>` : ''}
       </div>
     `;
   }

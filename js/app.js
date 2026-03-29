@@ -67,7 +67,7 @@
 
     // Update all views
     MapModule.plotEvents(filteredEvents);
-    Timeline.render(Filters.filterEvents(allEvents)); // Timeline shows all filtered, not date-filtered
+    Timeline.render(Filters.filterEvents(allEvents));
     renderEventsList(true);
     updateEventCount();
   }
@@ -137,7 +137,7 @@
       <div class="event-card__bar" style="background:${typeConfig.color || '#94A3B8'}"></div>
       <div class="event-card__content">
         <div class="event-card__header">
-          <div class="event-card__title">${flag} ${event.notes || event.type}</div>
+          <div class="event-card__title">${flag} ${escapeHtml(event.notes || event.type)}</div>
           <span class="badge badge--${severityClass}">${event.type.split('/')[0]}</span>
         </div>
         <div class="event-card__meta">
@@ -365,6 +365,29 @@
               break;
             }
           }
+        }
+      }
+    });
+  }
+
+  // === Share Button ===
+  const shareBtn = document.getElementById('share-btn');
+  if (shareBtn) {
+    shareBtn.addEventListener('click', async () => {
+      const shareData = {
+        title: 'ConflictWatch Live — Real-Time Global Conflict Tracker',
+        text: 'Track armed conflicts, battles, protests, and violence worldwide in real-time on an interactive map.',
+        url: 'https://conflictwatch-live.vercel.app/'
+      };
+      if (navigator.share) {
+        try { await navigator.share(shareData); } catch (e) { /* cancelled */ }
+      } else {
+        try {
+          await navigator.clipboard.writeText(shareData.url);
+          shareBtn.textContent = '✅';
+          setTimeout(() => { shareBtn.textContent = '🔗'; }, 2000);
+        } catch (e) {
+          window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(shareData.text)}&url=${encodeURIComponent(shareData.url)}`, '_blank');
         }
       }
     });

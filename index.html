@@ -5,7 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ConflictWatch Live — Real-Time Global Conflict Event Tracker</title>
   <meta name="description" content="Track armed conflicts, battles, protests, and violence worldwide in real-time. Interactive map and timeline powered by ACLED data. Free and open-source.">
-  <meta name="keywords" content="conflict tracker, war map, global conflicts, ACLED data, armed conflict, real-time conflict map, violence tracker, protest tracker">
+  <meta name="keywords" content="conflict tracker, war map, global conflicts, ACLED data, armed conflict, real-time conflict map, violence tracker, protest tracker, world conflict map, live war tracker, battle map, global violence monitor, conflict dashboard">
+  <meta name="author" content="ConflictWatch">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+  <meta name="theme-color" content="#2980B9">
   <link rel="canonical" href="https://conflictwatch-live.vercel.app/">
 
   <!-- Open Graph -->
@@ -24,7 +27,7 @@
   <meta name="twitter:description" content="Track armed conflicts worldwide in real-time on an interactive map and timeline.">
   <meta name="twitter:image" content="https://conflictwatch-live.vercel.app/assets/images/og-preview.svg">
 
-  <!-- Structured Data -->
+  <!-- Structured Data - WebApplication -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -34,7 +37,51 @@
     "url": "https://conflictwatch-live.vercel.app/",
     "applicationCategory": "NewsApplication",
     "operatingSystem": "Any",
-    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "author": { "@type": "Organization", "name": "ConflictWatch" },
+    "datePublished": "2026-03-28",
+    "inLanguage": "en"
+  }
+  </script>
+  <!-- Structured Data - FAQ for rich snippets -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is ConflictWatch Live?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "ConflictWatch Live is a free, real-time global conflict event tracker that displays armed conflicts, battles, protests, and violence on an interactive world map powered by ACLED data."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Where does the conflict data come from?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Data comes primarily from the Armed Conflict Location & Event Data Project (ACLED), which collects real-time data on political violence and protest events worldwide."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is ConflictWatch Live free to use?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, ConflictWatch Live is completely free to use. The interactive map, filters, and timeline are available to everyone at no cost."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How often is the conflict data updated?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The dashboard auto-refreshes every 30 minutes. ACLED updates their data weekly on Saturdays covering the previous week's events."
+        }
+      }
+    ]
   }
   </script>
 
@@ -141,6 +188,7 @@
         <button class="btn btn--ghost btn--sm" id="filter-toggle" aria-expanded="false" aria-controls="filter-panel">
           Filters <span class="filter-count" id="filter-count">0</span>
         </button>
+        <button class="btn btn--ghost btn--sm share-btn" id="share-btn" aria-label="Share this page" title="Share">🔗</button>
         <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">🌙</button>
         <button class="hamburger" id="hamburger" aria-label="Toggle menu">
           <span class="hamburger__line"></span>
@@ -200,11 +248,13 @@
         <a href="/pages/how-to-use.html">How to Use</a>
         <a href="/pages/privacy.html">Privacy</a>
         <a href="/pages/terms.html">Terms</a>
+        <a href="mailto:taeshinkim11@gmail.com?subject=ConflictWatch%20Feedback">Feedback</a>
       </div>
       <span class="visitor-counter" id="visitor-counter"></span>
     </footer>
 
     <button class="sidebar-toggle" id="sidebar-toggle" aria-label="Toggle event list">📋</button>
+    <a href="mailto:taeshinkim11@gmail.com?subject=ConflictWatch%20Feedback&body=Hi%2C%0A%0AI%20have%20a%20suggestion%20for%20ConflictWatch%20Live%3A%0A%0A" class="feedback-fab" id="feedback-fab" aria-label="Send feedback" title="Send us feedback">💬</a>
     <div class="ad-slot ad-slot--mobile-footer" id="ad-mobile-footer" aria-label="Advertisement"></div>
   </div>
 
