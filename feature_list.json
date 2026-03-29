@@ -11,6 +11,6 @@
   { "id": "F-010", "title": "Adsterra Ad Integration", "status": "done", "priority": 2, "depends_on": ["F-001"] },
   { "id": "F-011", "title": "Responsive Design", "status": "done", "priority": 1, "depends_on": ["F-002", "F-004"] },
   { "id": "F-012", "title": "Dark Mode", "status": "done", "priority": 3, "depends_on": ["F-002"] },
-  { "id": "F-013", "title": "Deployment to Netlify", "status": "todo", "priority": 1, "depends_on": ["F-001"] },
+  { "id": "F-013", "title": "Deployment to Vercel (adapted from Netlify)", "status": "done", "priority": 1, "depends_on": ["F-001"] },
   { "id": "F-014", "title": "Performance & Accessibility", "status": "done", "priority": 2, "depends_on": ["F-002", "F-008"] }
 ]

@@ -16,7 +16,7 @@
   <meta property="og:description" content="Track armed conflicts, battles, protests, and violence worldwide in real-time on an interactive map.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://conflictwatch-live.vercel.app/">
-  <meta property="og:image" content="https://conflictwatch-live.vercel.app/assets/images/og-preview.svg">
+  <meta property="og:image" content="https://conflictwatch-live.vercel.app/assets/images/og-preview.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:locale" content="en_US">
@@ -25,7 +25,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="ConflictWatch Live — Global Conflict Map">
   <meta name="twitter:description" content="Track armed conflicts worldwide in real-time on an interactive map and timeline.">
-  <meta name="twitter:image" content="https://conflictwatch-live.vercel.app/assets/images/og-preview.svg">
+  <meta name="twitter:image" content="https://conflictwatch-live.vercel.app/assets/images/og-preview.png">
 
   <!-- Structured Data - WebApplication -->
   <script type="application/ld+json">
@@ -85,9 +85,15 @@
   }
   </script>
 
-  <!-- Fonts -->
+  <!-- Preconnect to critical origins -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://unpkg.com" crossorigin>
+  <link rel="preconnect" href="https://a.basemaps.cartocdn.com" crossorigin>
+  <link rel="preconnect" href="https://b.basemaps.cartocdn.com" crossorigin>
+  <link rel="dns-prefetch" href="https://api.acleddata.com">
+
+  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
   <!-- Leaflet CSS -->
@@ -159,6 +165,7 @@
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7098271335538021" crossorigin="anonymous"></script>
 
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌍</text></svg>">
+  <link rel="manifest" href="/manifest.json">
 </head>
 <body>
   <a href="#main-content" class="skip-link">Skip to content</a>
