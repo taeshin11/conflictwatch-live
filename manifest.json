@@ -1,18 +1,28 @@
 {
   "name": "ConflictWatch Live",
   "short_name": "ConflictWatch",
-  "description": "Real-time global conflict event tracker with interactive map and timeline",
+  "description": "Real-time global conflict event tracker with interactive map, timeline, and 12-language support",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#F5F3EF",
   "theme_color": "#2980B9",
   "orientation": "any",
-  "categories": ["news", "education"],
+  "categories": ["news", "education", "reference"],
+  "lang": "en",
+  "dir": "auto",
   "icons": [
     {
       "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌍</text></svg>",
       "sizes": "any",
       "type": "image/svg+xml"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "assets/images/og-preview.png",
+      "sizes": "1200x630",
+      "type": "image/png",
+      "label": "ConflictWatch Live dashboard showing global conflict map"
     }
   ]
 }

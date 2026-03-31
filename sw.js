@@ -1,4 +1,4 @@
-const CACHE_NAME = 'conflictwatch-v1';
+const CACHE_NAME = 'conflictwatch-v2';
 const STATIC_ASSETS = [
   '/',
   '/index.html',
@@ -8,12 +8,14 @@ const STATIC_ASSETS = [
   '/css/components.css',
   '/css/responsive.css',
   '/js/config.js',
+  '/js/i18n.js',
   '/js/data.js',
   '/js/map.js',
   '/js/filters.js',
   '/js/timeline.js',
   '/js/counter.js',
   '/js/ads.js',
+  '/js/feedback.js',
   '/js/app.js',
   '/manifest.json'
 ];

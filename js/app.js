@@ -18,13 +18,17 @@
   const sidebarToggleBtn = document.getElementById('sidebar-toggle');
 
   // === Init Modules ===
+  I18n.init();
   MapModule.init();
   Timeline.init(onTimelineSelect);
   Filters.init(onFiltersChange);
   VisitorCounter.init();
   AdManager.init();
+  FeedbackModal.init();
   initThemeToggle();
   initSidebarToggle();
+  initLangSwitcher();
+  initFooterFeedback();
 
   // === Fetch Data ===
   showLoadingSkeleton();
@@ -93,8 +97,8 @@
         eventsList.innerHTML = `
           <div class="empty-state">
             <div class="empty-state__icon">🔍</div>
-            <div class="empty-state__title">No events match your filters</div>
-            <div class="empty-state__text">Try adjusting the date range, region, or event type</div>
+            <div class="empty-state__title">${I18n.t('noEvents')}</div>
+            <div class="empty-state__text">${I18n.t('noEventsHint')}</div>
           </div>
         `;
       }
@@ -144,7 +148,7 @@
           <span>${shortDate}</span>
           <span class="event-card__meta-sep"></span>
           <span>${event.location || event.country}</span>
-          ${event.fatalities > 0 ? `<span class="event-card__meta-sep"></span><span class="event-card__fatalities">${event.fatalities} killed</span>` : ''}
+          ${event.fatalities > 0 ? `<span class="event-card__meta-sep"></span><span class="event-card__fatalities">${event.fatalities} ${I18n.t('killed')}</span>` : ''}
         </div>
       </div>
     `;
@@ -209,20 +213,21 @@
     const d = new Date(dateStr);
     const now = new Date();
     const diffDays = Math.floor((now - d) / 86400000);
-    if (diffDays === 0) return 'Today';
-    if (diffDays === 1) return 'Yesterday';
-    if (diffDays < 7) return `${diffDays}d ago`;
-    return d.toLocaleDateString('en', { month: 'short', day: 'numeric' });
+    if (diffDays === 0) return I18n.t('today');
+    if (diffDays === 1) return I18n.t('yesterday');
+    if (diffDays < 7) return `${diffDays}${I18n.t('daysAgo')}`;
+    const locale = I18n.getLang() === 'en' ? 'en' : I18n.getLang();
+    return d.toLocaleDateString(locale, { month: 'short', day: 'numeric' });
   }
 
   function updateSourceBanner() {
     if (!statusBanner) return;
     const source = DataService.getSource();
     if (source === 'sample') {
-      statusBanner.innerHTML = '<span class="status-banner__icon">ℹ️</span> Showing sample data — add your ACLED API key for live events';
+      statusBanner.innerHTML = `<span class="status-banner__icon">ℹ️</span> ${I18n.t('sampleDataMsg')}`;
       statusBanner.classList.add('status-banner--visible');
     } else if (source === 'reliefweb') {
-      statusBanner.innerHTML = '<span class="status-banner__icon">ℹ️</span> Data source: ReliefWeb (limited coverage)';
+      statusBanner.innerHTML = `<span class="status-banner__icon">ℹ️</span> ${I18n.t('reliefwebMsg')}`;
       statusBanner.classList.add('status-banner--visible');
     } else {
       statusBanner.classList.remove('status-banner--visible');
@@ -234,7 +239,7 @@
     const time = DataService.getLastFetchTime();
     if (time) {
       const mins = Math.round((Date.now() - time.getTime()) / 60000);
-      lastUpdatedEl.textContent = mins < 1 ? 'Just now' : `${mins}m ago`;
+      lastUpdatedEl.textContent = mins < 1 ? I18n.t('justNow') : `${mins}${I18n.t('minsAgo')}`;
     }
   }
 
@@ -242,9 +247,9 @@
     if (!eventCountEl) return;
     const selectedDate = Timeline.getSelectedDate();
     if (selectedDate) {
-      eventCountEl.textContent = `${filteredEvents.length} events · ${selectedDate}`;
+      eventCountEl.textContent = `${filteredEvents.length} ${I18n.t('events')} · ${selectedDate}`;
     } else {
-      eventCountEl.textContent = `${filteredEvents.length} events`;
+      eventCountEl.textContent = `${filteredEvents.length} ${I18n.t('events')}`;
     }
 
     // Update map overlay stats
@@ -375,9 +380,9 @@
   if (shareBtn) {
     shareBtn.addEventListener('click', async () => {
       const shareData = {
-        title: 'ConflictWatch Live — Real-Time Global Conflict Tracker',
-        text: 'Track armed conflicts, battles, protests, and violence worldwide in real-time on an interactive map.',
-        url: 'https://conflictwatch-live.vercel.app/'
+        title: I18n.t('shareTitle'),
+        text: I18n.t('shareText'),
+        url: window.location.href
       };
       if (navigator.share) {
         try { await navigator.share(shareData); } catch (e) { /* cancelled */ }
@@ -396,6 +401,60 @@
   // Resize handler
   window.addEventListener('resize', () => {
     MapModule.invalidateSize();
+  });
+
+  // === Language Switcher ===
+  function initLangSwitcher() {
+    const btn = document.getElementById('lang-btn');
+    const dropdown = document.getElementById('lang-dropdown');
+    if (!btn || !dropdown) return;
+
+    // Build options
+    const langs = I18n.getSupportedLanguages();
+    dropdown.innerHTML = langs.map(code => {
+      const active = code === I18n.getLang() ? ' lang-switcher__option--active' : '';
+      return `<button class="lang-switcher__option${active}" data-lang="${code}">${I18n.getLangName(code)}</button>`;
+    }).join('');
+
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      dropdown.classList.toggle('lang-switcher__dropdown--open');
+    });
+
+    dropdown.addEventListener('click', (e) => {
+      const opt = e.target.closest('[data-lang]');
+      if (!opt) return;
+      I18n.setLanguage(opt.dataset.lang);
+      dropdown.classList.remove('lang-switcher__dropdown--open');
+      // Rebuild dropdown active states
+      dropdown.querySelectorAll('.lang-switcher__option').forEach(el => {
+        el.classList.toggle('lang-switcher__option--active', el.dataset.lang === I18n.getLang());
+      });
+      // Re-render dynamic content
+      onDataLoaded();
+    });
+
+    // Close on outside click
+    document.addEventListener('click', () => {
+      dropdown.classList.remove('lang-switcher__dropdown--open');
+    });
+  }
+
+  // === Footer Feedback Link ===
+  function initFooterFeedback() {
+    const link = document.getElementById('footer-feedback-link');
+    if (link) {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        FeedbackModal.open();
+      });
+    }
+  }
+
+  // Re-apply i18n on language change
+  document.addEventListener('cw:lang-change', () => {
+    I18n.applyTranslations();
+    onDataLoaded();
   });
 
   // Register service worker

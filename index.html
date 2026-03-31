@@ -5,11 +5,28 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ConflictWatch Live — Real-Time Global Conflict Event Tracker</title>
   <meta name="description" content="Track armed conflicts, battles, protests, and violence worldwide in real-time. Interactive map and timeline powered by ACLED data. Free and open-source.">
-  <meta name="keywords" content="conflict tracker, war map, global conflicts, ACLED data, armed conflict, real-time conflict map, violence tracker, protest tracker, world conflict map, live war tracker, battle map, global violence monitor, conflict dashboard">
+  <meta name="keywords" content="conflict tracker, war map, global conflicts, ACLED data, armed conflict, real-time conflict map, violence tracker, protest tracker, world conflict map, live war tracker, battle map, global violence monitor, conflict dashboard, war tracker 2026, conflict map today, world war map live, ukraine war map, middle east conflict map, africa conflict tracker, protests worldwide, global security monitor, political violence tracker, crisis map, humanitarian crisis tracker">
   <meta name="author" content="ConflictWatch">
-  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1">
   <meta name="theme-color" content="#2980B9">
+  <meta name="rating" content="General">
+  <meta name="revisit-after" content="1 days">
+  <meta http-equiv="content-language" content="en">
   <link rel="canonical" href="https://conflictwatch-live.vercel.app/">
+  <link rel="alternate" hreflang="en" href="https://conflictwatch-live.vercel.app/">
+  <link rel="alternate" hreflang="ko" href="https://conflictwatch-live.vercel.app/?lang=ko">
+  <link rel="alternate" hreflang="es" href="https://conflictwatch-live.vercel.app/?lang=es">
+  <link rel="alternate" hreflang="fr" href="https://conflictwatch-live.vercel.app/?lang=fr">
+  <link rel="alternate" hreflang="de" href="https://conflictwatch-live.vercel.app/?lang=de">
+  <link rel="alternate" hreflang="ja" href="https://conflictwatch-live.vercel.app/?lang=ja">
+  <link rel="alternate" hreflang="zh" href="https://conflictwatch-live.vercel.app/?lang=zh">
+  <link rel="alternate" hreflang="ar" href="https://conflictwatch-live.vercel.app/?lang=ar">
+  <link rel="alternate" hreflang="pt" href="https://conflictwatch-live.vercel.app/?lang=pt">
+  <link rel="alternate" hreflang="ru" href="https://conflictwatch-live.vercel.app/?lang=ru">
+  <link rel="alternate" hreflang="hi" href="https://conflictwatch-live.vercel.app/?lang=hi">
+  <link rel="alternate" hreflang="tr" href="https://conflictwatch-live.vercel.app/?lang=tr">
+  <link rel="alternate" hreflang="x-default" href="https://conflictwatch-live.vercel.app/">
 
   <!-- Open Graph -->
   <meta property="og:title" content="ConflictWatch Live — Real-Time Global Conflict Event Tracker">
@@ -20,6 +37,18 @@
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="ko_KR">
+  <meta property="og:locale:alternate" content="es_ES">
+  <meta property="og:locale:alternate" content="fr_FR">
+  <meta property="og:locale:alternate" content="de_DE">
+  <meta property="og:locale:alternate" content="ja_JP">
+  <meta property="og:locale:alternate" content="zh_CN">
+  <meta property="og:locale:alternate" content="ar_SA">
+  <meta property="og:locale:alternate" content="pt_BR">
+  <meta property="og:locale:alternate" content="ru_RU">
+  <meta property="og:locale:alternate" content="hi_IN">
+  <meta property="og:locale:alternate" content="tr_TR">
+  <meta property="og:site_name" content="ConflictWatch Live">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
@@ -40,7 +69,26 @@
     "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
     "author": { "@type": "Organization", "name": "ConflictWatch" },
     "datePublished": "2026-03-28",
-    "inLanguage": "en"
+    "dateModified": "2026-03-31",
+    "inLanguage": ["en","ko","es","fr","de","ja","zh","ar","pt","ru","hi","tr"],
+    "screenshot": "https://conflictwatch-live.vercel.app/assets/images/og-preview.png",
+    "featureList": "Interactive conflict map, Real-time ACLED data, Event filtering by type/region/date, Timeline visualization, Dark mode, Multi-language support (12 languages), Offline PWA support"
+  }
+  </script>
+  <!-- Structured Data - Organization -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "ConflictWatch",
+    "url": "https://conflictwatch-live.vercel.app/",
+    "logo": "https://conflictwatch-live.vercel.app/assets/images/og-preview.png",
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "email": "taeshinkim11@gmail.com",
+      "contactType": "customer support"
+    },
+    "sameAs": ["https://github.com/taeshin11/conflictwatch-live"]
   }
   </script>
   <!-- Structured Data - FAQ for rich snippets -->
@@ -182,8 +230,8 @@
       <div class="header__logo">
         <div class="header__logo-icon">🌍</div>
         <div>
-          <h1 class="header__title">ConflictWatch</h1>
-          <span class="header__subtitle">Real-time global conflict tracker</span>
+          <h1 class="header__title" data-i18n="siteTitle">ConflictWatch</h1>
+          <span class="header__subtitle" data-i18n="siteSubtitle">Real-time global conflict tracker</span>
         </div>
       </div>
 
@@ -192,12 +240,16 @@
           <span class="last-updated__dot"></span>
           <span id="last-updated">Loading...</span>
         </div>
+        <div class="lang-switcher" id="lang-switcher">
+          <button class="btn btn--ghost btn--sm lang-switcher__btn" id="lang-btn" aria-label="Language" title="Language">🌐</button>
+          <div class="lang-switcher__dropdown" id="lang-dropdown"></div>
+        </div>
         <button class="btn btn--ghost btn--sm" id="filter-toggle" aria-expanded="false" aria-controls="filter-panel">
-          Filters <span class="filter-count" id="filter-count">0</span>
+          <span data-i18n="filters">Filters</span> <span class="filter-count" id="filter-count">0</span>
         </button>
-        <button class="btn btn--ghost btn--sm share-btn" id="share-btn" aria-label="Share this page" title="Share">🔗</button>
-        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">🌙</button>
-        <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <button class="btn btn--ghost btn--sm share-btn" id="share-btn" data-i18n-aria="share" aria-label="Share this page" title="Share">🔗</button>
+        <button class="theme-toggle" id="theme-toggle" data-i18n-aria="toggleDark" aria-label="Toggle dark mode">🌙</button>
+        <button class="hamburger" id="hamburger" data-i18n-aria="toggleMenu" aria-label="Toggle menu">
           <span class="hamburger__line"></span>
           <span class="hamburger__line"></span>
           <span class="hamburger__line"></span>
@@ -210,9 +262,9 @@
       <div class="map-container">
         <div id="map" role="application" aria-label="Conflict events map"></div>
         <div class="map-stats" id="map-stats">
-          <div class="map-stat"><span class="map-stat__value" id="stat-total">—</span> events</div>
-          <div class="map-stat"><span class="map-stat__value" id="stat-countries">—</span> countries</div>
-          <div class="map-stat" id="stat-fatalities-wrap" style="display:none"><span class="map-stat__value" id="stat-fatalities">—</span> fatalities</div>
+          <div class="map-stat"><span class="map-stat__value" id="stat-total">—</span> <span data-i18n="events">events</span></div>
+          <div class="map-stat"><span class="map-stat__value" id="stat-countries">—</span> <span data-i18n="countries">countries</span></div>
+          <div class="map-stat" id="stat-fatalities-wrap" style="display:none"><span class="map-stat__value" id="stat-fatalities">—</span> <span data-i18n="fatalities">fatalities</span></div>
         </div>
       </div>
 
@@ -220,8 +272,8 @@
         <div class="sidebar__drag-handle"></div>
 
         <div class="sidebar__header">
-          <span class="sidebar__title" id="event-count">Loading events...</span>
-          <button class="btn btn--icon btn--ghost" id="sidebar-close" aria-label="Close sidebar">✕</button>
+          <span class="sidebar__title" id="event-count" data-i18n="loadingEvents">Loading events...</span>
+          <button class="btn btn--icon btn--ghost" id="sidebar-close" data-i18n-aria="closeSidebar" aria-label="Close sidebar">✕</button>
         </div>
 
         <div class="filter-panel" id="filter-panel" role="region" aria-label="Filters"></div>
@@ -229,14 +281,14 @@
         <div class="sidebar__search">
           <div class="sidebar__search-wrap">
             <span class="sidebar__search-icon">🔍</span>
-            <input type="search" id="sidebar-search" placeholder="Search country, event type..." aria-label="Search events">
+            <input type="search" id="sidebar-search" data-i18n="searchPlaceholder" placeholder="Search country, event type..." aria-label="Search events">
           </div>
         </div>
 
         <div class="sidebar__events" id="events-list" role="list" aria-live="polite"></div>
 
         <div style="padding:8px 18px;text-align:center">
-          <button class="btn btn--ghost" id="load-more" style="display:none;width:100%">Load More</button>
+          <button class="btn btn--ghost" id="load-more" style="display:none;width:100%" data-i18n="loadMore">Load More</button>
         </div>
 
         <!-- Sidebar Ad (desktop only) -->
@@ -249,19 +301,19 @@
 
     <!-- Footer -->
     <footer class="footer">
-      <span>ConflictWatch Live &copy; <span id="copyright-year">2026</span> &middot; Data: <a href="https://acleddata.com" target="_blank" rel="noopener noreferrer">ACLED</a></span>
+      <span><span data-i18n="copyright">ConflictWatch Live</span> &copy; <span id="copyright-year">2026</span> &middot; <span data-i18n="data">Data</span>: <a href="https://acleddata.com" target="_blank" rel="noopener noreferrer">ACLED</a></span>
       <div style="display:flex;gap:12px;flex-wrap:wrap">
-        <a href="/pages/about.html">About</a>
-        <a href="/pages/how-to-use.html">How to Use</a>
-        <a href="/pages/privacy.html">Privacy</a>
-        <a href="/pages/terms.html">Terms</a>
-        <a href="mailto:taeshinkim11@gmail.com?subject=ConflictWatch%20Feedback">Feedback</a>
+        <a href="/pages/about.html" data-i18n="about">About</a>
+        <a href="/pages/how-to-use.html" data-i18n="howToUse">How to Use</a>
+        <a href="/pages/privacy.html" data-i18n="privacy">Privacy</a>
+        <a href="/pages/terms.html" data-i18n="terms">Terms</a>
+        <a href="#" id="footer-feedback-link" data-i18n="feedback">Feedback</a>
       </div>
       <span class="visitor-counter" id="visitor-counter"></span>
     </footer>
 
     <button class="sidebar-toggle" id="sidebar-toggle" aria-label="Toggle event list">📋</button>
-    <a href="mailto:taeshinkim11@gmail.com?subject=ConflictWatch%20Feedback&body=Hi%2C%0A%0AI%20have%20a%20suggestion%20for%20ConflictWatch%20Live%3A%0A%0A" class="feedback-fab" id="feedback-fab" aria-label="Send feedback" title="Send us feedback">💬</a>
+    <button class="feedback-fab" id="feedback-fab" aria-label="Send feedback" title="Send us feedback" data-i18n-aria="feedback" data-i18n-title="feedback">💬</button>
     <div class="ad-slot ad-slot--mobile-footer" id="ad-mobile-footer" aria-label="Advertisement"></div>
   </div>
 
@@ -278,12 +330,14 @@
   <script src="https://unpkg.com/leaflet-fullscreen@2.4.0/dist/Leaflet.fullscreen.min.js"></script>
 
   <script src="js/config.js"></script>
+  <script src="js/i18n.js"></script>
   <script src="js/data.js"></script>
   <script src="js/map.js"></script>
   <script src="js/filters.js"></script>
   <script src="js/timeline.js"></script>
   <script src="js/counter.js"></script>
   <script src="js/ads.js"></script>
+  <script src="js/feedback.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>

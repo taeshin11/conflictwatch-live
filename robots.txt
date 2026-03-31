@@ -1,4 +1,21 @@
 User-agent: *
 Allow: /
+Disallow: /sw.js
 
 Sitemap: https://conflictwatch-live.vercel.app/sitemap.xml
+
+# Crawl-delay for polite bots
+User-agent: AdsBot-Google
+Allow: /
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: Twitterbot
+Allow: /

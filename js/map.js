@@ -88,10 +88,10 @@ const MapModule = (() => {
         <div class="map-popup__details">
           <div class="map-popup__detail"><span class="map-popup__detail-icon">&#x1F4C5;</span> ${escapeHtml(event.date)}</div>
           <div class="map-popup__detail"><span class="map-popup__detail-icon">&#x1F4CD;</span> ${escapeHtml(event.location)}, ${escapeHtml(event.country)}</div>
-          ${event.fatalities > 0 ? `<div class="map-popup__detail" style="color:var(--severity-critical);font-weight:600"><span class="map-popup__detail-icon">&#x26A0;</span> ${event.fatalities} fatalities reported</div>` : ''}
+          ${event.fatalities > 0 ? `<div class="map-popup__detail" style="color:var(--severity-critical);font-weight:600"><span class="map-popup__detail-icon">&#x26A0;</span> ${event.fatalities} ${typeof I18n !== 'undefined' ? I18n.t('fataltiesReported') : 'fatalities reported'}</div>` : ''}
           ${event.actor1 ? `<div class="map-popup__detail"><span class="map-popup__detail-icon">&#x1F465;</span> ${escapeHtml(event.actor1)}${event.actor2 ? ' vs ' + escapeHtml(event.actor2) : ''}</div>` : ''}
         </div>
-        ${event.source ? `<div class="map-popup__source">Source: ${escapeHtml(event.source)}</div>` : ''}
+        ${event.source ? `<div class="map-popup__source">${typeof I18n !== 'undefined' ? I18n.t('source') : 'Source'}: ${escapeHtml(event.source)}</div>` : ''}
       </div>
     `;
   }

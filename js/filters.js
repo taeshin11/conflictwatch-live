@@ -27,7 +27,9 @@ const Filters = (() => {
   }
 
   function saveToURL() {
-    const params = new URLSearchParams();
+    const params = new URLSearchParams(window.location.search);
+    // Clear filter params (keep other params like lang)
+    ['types', 'date', 'region', 'fatalities', 'q'].forEach(k => params.delete(k));
     if (_state.types.length) params.set('types', _state.types.join(','));
     if (_state.dateRange !== '30d') params.set('date', _state.dateRange);
     if (_state.region !== 'All Regions') params.set('region', _state.region);
@@ -43,52 +45,54 @@ const Filters = (() => {
     const panel = document.getElementById('filter-panel');
     if (!panel) return;
 
+    const t = typeof I18n !== 'undefined' ? I18n.t.bind(I18n) : k => k;
+
     const typeOptions = Object.keys(CONFIG.eventTypes).map(type => {
       const cfg = CONFIG.eventTypes[type];
       const active = _state.types.length === 0 || _state.types.includes(type);
       return `
         <button class="filter-chip ${active ? 'filter-chip--active' : ''}" data-type="${type}" aria-pressed="${active}">
           <span class="filter-chip__dot" style="background:${cfg.color}"></span>
-          ${type}
+          ${t(type)}
         </button>
       `;
     }).join('');
 
     const regionOptions = Object.keys(CONFIG.regions).map(r =>
-      `<option value="${r}" ${_state.region === r ? 'selected' : ''}>${r}</option>`
+      `<option value="${r}" ${_state.region === r ? 'selected' : ''}>${t(r)}</option>`
     ).join('');
 
     panel.innerHTML = `
       <div class="filter-group">
-        <span class="filter-group__label">Event Type</span>
+        <span class="filter-group__label">${t('eventType')}</span>
         <div class="filter-group__options" id="filter-types">
           ${typeOptions}
         </div>
       </div>
       <div class="filter-group">
-        <span class="filter-group__label">Date Range</span>
+        <span class="filter-group__label">${t('dateRange')}</span>
         <div class="date-range">
           <select id="filter-date-range">
-            <option value="7d" ${_state.dateRange === '7d' ? 'selected' : ''}>Last 7 days</option>
-            <option value="30d" ${_state.dateRange === '30d' ? 'selected' : ''}>Last 30 days</option>
-            <option value="90d" ${_state.dateRange === '90d' ? 'selected' : ''}>Last 90 days</option>
+            <option value="7d" ${_state.dateRange === '7d' ? 'selected' : ''}>${t('last7d')}</option>
+            <option value="30d" ${_state.dateRange === '30d' ? 'selected' : ''}>${t('last30d')}</option>
+            <option value="90d" ${_state.dateRange === '90d' ? 'selected' : ''}>${t('last90d')}</option>
           </select>
         </div>
       </div>
       <div class="filter-group">
-        <span class="filter-group__label">Region</span>
+        <span class="filter-group__label">${t('region')}</span>
         <select class="region-select" id="filter-region">
           ${regionOptions}
         </select>
       </div>
       <div class="filter-group">
-        <span class="filter-group__label">Min. Fatalities</span>
+        <span class="filter-group__label">${t('minFatalities')}</span>
         <input type="number" id="filter-fatalities" min="0" value="${_state.minFatalities}"
           style="width:80px;padding:6px 10px;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--bg-card);color:var(--text-primary);font-size:0.8rem;">
       </div>
       <div class="filter-actions">
-        <button class="btn btn--ghost" id="filter-reset">Reset All</button>
-        <button class="btn btn--primary" id="filter-apply">Apply Filters</button>
+        <button class="btn btn--ghost" id="filter-reset">${t('resetAll')}</button>
+        <button class="btn btn--primary" id="filter-apply">${t('applyFilters')}</button>
       </div>
     `;
   }

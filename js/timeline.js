@@ -24,7 +24,8 @@ const Timeline = (() => {
     // Get sorted dates
     const dates = Object.keys(byDate).sort();
     if (dates.length === 0) {
-      _container.innerHTML = '<span class="text-muted" style="font-size:0.75rem;align-self:center;">No timeline data</span>';
+      const noDataText = typeof I18n !== 'undefined' ? I18n.t('noTimeline') : 'No timeline data';
+      _container.innerHTML = `<span class="text-muted" style="font-size:0.75rem;align-self:center;">${noDataText}</span>`;
       return;
     }
 
@@ -65,7 +66,8 @@ const Timeline = (() => {
       const isSelected = _selectedDate === date;
       const d = new Date(date);
       const dayLabel = d.getDate();
-      const monthLabel = d.toLocaleDateString('en', { month: 'short' });
+      const locale = typeof I18n !== 'undefined' ? I18n.getLang() : 'en';
+      const monthLabel = d.toLocaleDateString(locale, { month: 'short' });
       const showMonth = dayLabel === 1 || date === allDates[0];
 
       return `

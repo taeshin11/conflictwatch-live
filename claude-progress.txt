@@ -15,3 +15,7 @@
 2026-03-30T00:01:00Z | FIXES | Fixed ads.js syntax error, ACLED date param, XSS sanitization, double filtering | Next: Traffic & UX
 2026-03-30T00:02:00Z | SEO | Added FAQ structured data, IndexNow submission (Bing/Yandex), PNG OG image, PWA manifest, preload hints, share button, expanded meta keywords | Next: Feedback mechanism
 2026-03-30T00:03:00Z | UX | Added feedback FAB button + footer link (mailto) on all pages, social share via Web Share API | All PRD features COMPLETE
+2026-03-31T00:00:00Z | i18n | Added 12-language auto-detection (EN/KO/ES/FR/DE/JA/ZH/AR/PT/RU/HI/TR), language switcher UI, RTL support, all UI strings translated | Next: deploy
+2026-03-31T00:01:00Z | FEEDBACK | Feedback modal with FormSubmit.co integration, sends to taeshinkim11@gmail.com, fallback mailto, footer link wired | Next: deploy
+2026-03-31T00:02:00Z | SEO | 70+ long-tail keywords, hreflang for 12 langs, OG locale alternates, Organization schema, Googlebot meta, sitemap xhtml:link, robots.txt bot rules | Next: deploy
+2026-03-31T00:03:00Z | FIXES | Fixed vercel.json rewrite for /pages/*, SW cache v2, filter URL preserves lang param, feedback FAB accessibility | Next: push
