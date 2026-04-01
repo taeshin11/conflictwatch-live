@@ -375,28 +375,65 @@
     });
   }
 
-  // === Share Button ===
-  const shareBtn = document.getElementById('share-btn');
-  if (shareBtn) {
-    shareBtn.addEventListener('click', async () => {
-      const shareData = {
-        title: I18n.t('shareTitle'),
-        text: I18n.t('shareText'),
-        url: window.location.href
-      };
-      if (navigator.share) {
-        try { await navigator.share(shareData); } catch (e) { /* cancelled */ }
-      } else {
+  // === Share Button & Dropdown ===
+  (function initShareDropdown() {
+    const shareBtn = document.getElementById('share-btn');
+    const shareDropdown = document.getElementById('share-dropdown');
+    if (!shareBtn || !shareDropdown) return;
+
+    // On mobile with Web Share API, use native share directly
+    shareBtn.addEventListener('click', async (e) => {
+      e.stopPropagation();
+      if (navigator.share && /Mobi|Android/i.test(navigator.userAgent)) {
         try {
-          await navigator.clipboard.writeText(shareData.url);
+          await navigator.share({
+            title: I18n.t('shareTitle'),
+            text: I18n.t('shareText'),
+            url: window.location.href
+          });
+        } catch (err) { /* cancelled */ }
+        return;
+      }
+      shareDropdown.classList.toggle('share-dropdown--open');
+    });
+
+    // Handle share platform clicks
+    shareDropdown.addEventListener('click', async (e) => {
+      const item = e.target.closest('[data-share]');
+      if (!item) return;
+      const platform = item.dataset.share;
+      const url = encodeURIComponent(window.location.href);
+      const text = encodeURIComponent(I18n.t('shareText'));
+      const title = encodeURIComponent(I18n.t('shareTitle'));
+
+      const urls = {
+        twitter: `https://twitter.com/intent/tweet?text=${text}&url=${url}`,
+        facebook: `https://www.facebook.com/sharer/sharer.php?u=${url}`,
+        linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${url}`,
+        whatsapp: `https://wa.me/?text=${text}%20${url}`,
+        telegram: `https://t.me/share/url?url=${url}&text=${text}`,
+        reddit: `https://www.reddit.com/submit?url=${url}&title=${title}`
+      };
+
+      if (platform === 'copy') {
+        try {
+          await navigator.clipboard.writeText(window.location.href);
           shareBtn.textContent = '✅';
           setTimeout(() => { shareBtn.textContent = '🔗'; }, 2000);
-        } catch (e) {
-          window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(shareData.text)}&url=${encodeURIComponent(shareData.url)}`, '_blank');
-        }
+        } catch (err) { /* fallback: do nothing */ }
+      } else if (urls[platform]) {
+        window.open(urls[platform], '_blank', 'width=600,height=400');
+      }
+      shareDropdown.classList.remove('share-dropdown--open');
+    });
+
+    // Close on outside click
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('#share-wrap')) {
+        shareDropdown.classList.remove('share-dropdown--open');
       }
     });
-  }
+  })();
 
   // Resize handler
   window.addEventListener('resize', () => {

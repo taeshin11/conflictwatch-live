@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ConflictWatch Live — Real-Time Global Conflict Event Tracker</title>
   <meta name="description" content="Track armed conflicts, battles, protests, and violence worldwide in real-time. Interactive map and timeline powered by ACLED data. Free and open-source.">
-  <meta name="keywords" content="conflict tracker, war map, global conflicts, ACLED data, armed conflict, real-time conflict map, violence tracker, protest tracker, world conflict map, live war tracker, battle map, global violence monitor, conflict dashboard, war tracker 2026, conflict map today, world war map live, ukraine war map, middle east conflict map, africa conflict tracker, protests worldwide, global security monitor, political violence tracker, crisis map, humanitarian crisis tracker">
+  <meta name="keywords" content="conflict tracker, war map, global conflicts, ACLED data, armed conflict, real-time conflict map, violence tracker, protest tracker, world conflict map, live war tracker, battle map, global violence monitor, conflict dashboard, war tracker 2025, conflict map today, world war map live, ukraine war map, middle east conflict map, africa conflict tracker, protests worldwide, global security monitor, political violence tracker, crisis map, humanitarian crisis tracker">
   <meta name="author" content="ConflictWatch">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1">
@@ -68,8 +68,8 @@
     "operatingSystem": "Any",
     "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
     "author": { "@type": "Organization", "name": "ConflictWatch" },
-    "datePublished": "2026-03-28",
-    "dateModified": "2026-03-31",
+    "datePublished": "2025-03-28",
+    "dateModified": "2025-03-31",
     "inLanguage": ["en","ko","es","fr","de","ja","zh","ar","pt","ru","hi","tr"],
     "screenshot": "https://conflictwatch-live.vercel.app/assets/images/og-preview.png",
     "featureList": "Interactive conflict map, Real-time ACLED data, Event filtering by type/region/date, Timeline visualization, Dark mode, Multi-language support (12 languages), Offline PWA support"
@@ -247,7 +247,18 @@
         <button class="btn btn--ghost btn--sm" id="filter-toggle" aria-expanded="false" aria-controls="filter-panel">
           <span data-i18n="filters">Filters</span> <span class="filter-count" id="filter-count">0</span>
         </button>
-        <button class="btn btn--ghost btn--sm share-btn" id="share-btn" data-i18n-aria="share" aria-label="Share this page" title="Share">🔗</button>
+        <div class="share-wrap" id="share-wrap">
+          <button class="btn btn--ghost btn--sm share-btn" id="share-btn" data-i18n-aria="share" aria-label="Share this page" title="Share">🔗</button>
+          <div class="share-dropdown" id="share-dropdown">
+            <button class="share-dropdown__item" data-share="twitter">𝕏 Twitter</button>
+            <button class="share-dropdown__item" data-share="facebook">Facebook</button>
+            <button class="share-dropdown__item" data-share="linkedin">LinkedIn</button>
+            <button class="share-dropdown__item" data-share="whatsapp">WhatsApp</button>
+            <button class="share-dropdown__item" data-share="telegram">Telegram</button>
+            <button class="share-dropdown__item" data-share="reddit">Reddit</button>
+            <button class="share-dropdown__item" data-share="copy">📋 <span data-i18n="copyLink">Copy Link</span></button>
+          </div>
+        </div>
         <button class="theme-toggle" id="theme-toggle" data-i18n-aria="toggleDark" aria-label="Toggle dark mode">🌙</button>
         <button class="hamburger" id="hamburger" data-i18n-aria="toggleMenu" aria-label="Toggle menu">
           <span class="hamburger__line"></span>
@@ -301,7 +312,7 @@
 
     <!-- Footer -->
     <footer class="footer">
-      <span><span data-i18n="copyright">ConflictWatch Live</span> &copy; <span id="copyright-year">2026</span> &middot; <span data-i18n="data">Data</span>: <a href="https://acleddata.com" target="_blank" rel="noopener noreferrer">ACLED</a></span>
+      <span><span data-i18n="copyright">ConflictWatch Live</span> &copy; 2025 &middot; <span data-i18n="data">Data</span>: <a href="https://acleddata.com" target="_blank" rel="noopener noreferrer">ACLED</a></span>
       <div style="display:flex;gap:12px;flex-wrap:wrap">
         <a href="/pages/about.html" data-i18n="about">About</a>
         <a href="/pages/how-to-use.html" data-i18n="howToUse">How to Use</a>

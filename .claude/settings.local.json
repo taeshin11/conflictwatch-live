@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(vercel --version)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" https://conflictwatch-live.vercel.app/)",
+      "WebFetch(domain:conflictwatch-live.vercel.app)",
+      "Bash(curl -s https://conflictwatch-live.vercel.app/)",
+      "Bash(curl -s https://conflictwatch-live.vercel.app/?lang=ko)",
+      "Bash(curl -s https://conflictwatch-live.vercel.app/js/app.js)",
+      "Bash(curl -s https://conflictwatch-live.vercel.app/js/i18n.js)",
+      "Bash(curl -s https://conflictwatch-live.vercel.app/sw.js)",
+      "Bash(git add:*)"
+    ]
+  }
+}
